@@ -1,0 +1,15 @@
+version: '2.4'
+
+services:
+  pythonutil:
+    build: 
+      dockerfile: Dockerfile
+      context: ./
+    container_name: pythonutil
+    env_file:
+      - env_file
+    volumes:
+      - ../:/home/python/projects
+    working_dir: /home/python
+    entrypoint: tail
+    command: -f /dev/null
