@@ -11,6 +11,7 @@ services:
       - env_file
     volumes:
       - ../../:/home/python/projects
+      - /var/run/docker.sock:/var/run/docker.sock
     working_dir: /home/python
     entrypoint: tail
     command: -f /dev/null
@@ -24,6 +25,7 @@ services:
       - env_file
     volumes:
       - ../../:/home/python/projects
+      - /var/run/docker.sock:/var/run/docker.sock
     working_dir: /home/python
     entrypoint: tail
     command: -f /dev/null
