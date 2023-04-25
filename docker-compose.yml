@@ -7,6 +7,7 @@ services:
       context: ./version_3_9_16
       dockerfile: Dockerfile
     container_name: pythonutil_3_9_16
+    restart: unless-stopped
     env_file:
       - env_file
     volumes:
@@ -20,6 +21,7 @@ services:
       context: ./version_3_10
       dockerfile: Dockerfile
     container_name: pythonutil_3_10
+    restart: unless-stopped
     env_file:
       - env_file
     volumes:
