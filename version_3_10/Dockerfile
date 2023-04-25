@@ -1,7 +1,12 @@
-FROM python:3.9.16-buster
+FROM python:3.10-buster
 
 RUN apt-get update && \
       apt-get -y install sudo nano
+
+# Install Intel Certificates
+RUN wget http://certificates.intel.com/repository/certificates/IntelSHA2RootChain-Base64.zip -O /tmp/cert.zip && \
+    unzip /tmp/cert.zip -d /usr/local/share/ca-certificates && \
+    update-ca-certificates
 
 RUN addgroup --gid 1000 python
 # RUN useradd --uid 1000 --gid python --shell /bin/bash --create-home python
@@ -13,11 +18,19 @@ RUN echo "python ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
 # Setting the apt proxy configuration
 COPY apt.conf /etc/apt/apt.conf
 
+#Setting the user and workdirectory
 USER python
 WORKDIR /home/python
+
+
+# $HOME is the user specific
+COPY entrypoint.sh entrypoint.sh
+RUN sudo apt-get install docker.io -y
+RUN  sudo usermod -aG docker python
+# COPY bash_profile /home/python/.bash_profile
 
 # Installing the zsh
 # RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.5/zsh-in-docker.sh)"
 
 # ENTRYPOINT [ "/bin/bash" ]
-CMD [ "tail", "-f", "/dev/null" ]
+# CMD [ "tail", "-f", "/dev/null" ]

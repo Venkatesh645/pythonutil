@@ -4,8 +4,8 @@ services:
 
   pythonutil_3_9_16:
     build: 
-      dockerfile: Dockerfile_3_9_16
-      context: ./
+      context: ./version_3_9_16
+      dockerfile: Dockerfile
     container_name: pythonutil_3_9_16
     env_file:
       - env_file
@@ -13,13 +13,12 @@ services:
       - ../../:/home/python/projects
       - /var/run/docker.sock:/var/run/docker.sock
     working_dir: /home/python
-    entrypoint: tail
-    command: -f /dev/null
+    command: ./entrypoint.sh
 
   pythonutil_3_10:
     build: 
-      dockerfile: Dockerfile_3_10
-      context: ./
+      context: ./version_3_10
+      dockerfile: Dockerfile
     container_name: pythonutil_3_10
     env_file:
       - env_file
@@ -27,5 +26,4 @@ services:
       - ../../:/home/python/projects
       - /var/run/docker.sock:/var/run/docker.sock
     working_dir: /home/python
-    entrypoint: tail
-    command: -f /dev/null
+    command: ./entrypoint.sh
