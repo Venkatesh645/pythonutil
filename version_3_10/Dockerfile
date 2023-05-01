@@ -3,10 +3,6 @@ FROM python:3.10-buster
 RUN apt-get update && \
       apt-get -y install sudo nano
 
-# Install Intel Certificates
-RUN wget http://certificates.intel.com/repository/certificates/IntelSHA2RootChain-Base64.zip -O /tmp/cert.zip && \
-    unzip /tmp/cert.zip -d /usr/local/share/ca-certificates && \
-    update-ca-certificates
 
 RUN addgroup --gid 1000 python
 # RUN useradd --uid 1000 --gid python --shell /bin/bash --create-home python
